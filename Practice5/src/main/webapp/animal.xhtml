@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:head>
+</h:head>
+<body>
+	<h1>Animal</h1>
+	<h:form id="frmAnimal">
+	Name:<h:inputText value="#{animalController.animal.name}" />
+	
+	Race:<h:inputText value="#{animalController.animal.race}" />
+	Type:<h:inputText value="#{animalController.animal.type}" />
+	
+	
+	
+	
+		 <h:commandButton action="#{animalController.save}" value="Save">
+		 <f:ajax execute="frmAnimal" render="frmAnimal" /> 
+		 </h:commandButton>
+		 <h:commandButton rendered="#{animalController.editMode}"
+		  action="#{animalController.save}" value="Cancel" >
+		  <f:ajax render="frmAnimal"></f:ajax>
+		  </h:commandButton>
+		 <h:dataTable value="#{animalController.animals}" var="a" id="dtAnimal">
+		 <h:column> 
+		 <f:facet name="header">ID</f:facet>
+		 #{a.id} </h:column>
+		 <h:column> 
+		 <f:facet name="header">Name</f:facet>
+		 #{a.name} </h:column>
+		 <h:column> 
+		 <f:facet name="header">Race</f:facet>
+		 #{a.race} </h:column>
+		 <h:column> 
+		 <f:facet name="header">Type</f:facet>
+		 #{a.type} </h:column>
+		 <h:column>
+		 <f:facet name="header">Actions</f:facet>
+		 <h:commandButton action="#{animalController.delete(a)}" value="Delete" 
+		 onClick="return window.confirm ('Are you sure?')">
+		 <f:ajax render="frmAnimal:dtAnimal"/></h:commandButton>
+		 <h:commandButton action="#{animalController.update(a)}" value="Update" >
+		 <f:ajax render="frmAnimal"/> </h:commandButton>
+		 </h:column>
+		 </h:dataTable>
+		</h:form>
+	
+	</body>
+	
+	
+</html>

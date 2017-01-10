@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:head>
+</h:head>
+<body>
+	<h1>Store</h1>
+	
+	<h:form id="frmStore">
+	storeKey:<h:inputText value="#{storeController.store.storeKey}" />
+	regionKey:<h:inputText value="#{storeController.store.regionKey}" />
+	storeName:<h:inputText value="#{storeController.store.storeName}" />
+	storeCode:<h:inputText value="#{storeController.store.storeCode}" />
+	storeType:<h:inputText value="#{storeController.store.storeType}" />
+	streetAddress:<h:inputText value="#{storeController.store.streetAddress}" />
+	city:<h:inputText value="#{storeController.store.city}" />
+	stateProvince:<h:inputText value="#{storeController.store.stateProvince}" />
+	postalCode:<h:inputText value="#{storeController.store.postalCode}" />
+	storeManager:<h:inputText value="#{storeController.store.storeManager}" />
+	phone:<h:inputText value="#{storeController.store.phone}" />
+	fax:<h:inputText value="#{storeController.store.fax}" />
+	
+	
+		 <h:commandButton action="#{storeController.save}" value="Save">
+		 <f:ajax execute="frmStore" render="frmStore" /> 
+		 </h:commandButton>
+		 <h:commandButton rendered="#{storeController.editMode}"
+		  action="#{storeController.save}" value="Cancel" >
+		  <f:ajax render="frmStore"></f:ajax>
+		  </h:commandButton>
+		 <h:dataTable value="#{storeController.stores}" var="s" id="dtStore">
+		 <h:column> 
+		 <f:facet name="header">ID</f:facet>
+		 #{s.id} </h:column>
+		 <h:column> 
+		 <f:facet name="header">Store Key</f:facet>
+		 #{s.storeKey} </h:column>
+		 <h:column> 
+		 <f:facet name="header">Region Key</f:facet>
+		 #{s.regionKey} </h:column>
+		 <h:column> 
+		 <f:facet name="header">Store Name</f:facet>
+		 #{s.storeName} </h:column>
+		 
+		  <h:column> 
+		 <f:facet name="header">Store Code</f:facet>
+		 #{s.storeCode} </h:column>
+		 <h:column> 
+		 <f:facet name="header">Store Type</f:facet>
+		 #{s.storeType} </h:column>
+		 <h:column> 
+		 <f:facet name="header">Street Address</f:facet>
+		 #{s.streetAddress} </h:column>
+		 <h:column> 
+		 <f:facet name="header">City</f:facet>
+		 #{s.city} </h:column>
+		 <h:column> 
+		 <f:facet name="header">State Province</f:facet>
+		 #{s.stateProvince} </h:column>
+		 <h:column> 
+		 <f:facet name="header">Postal Code</f:facet>
+		 #{s.postalCode} </h:column>
+		 <h:column> 
+		 <f:facet name="header">Store Manager</f:facet>
+		 #{s.storeManager} </h:column>
+		 <h:column> 
+		 <f:facet name="header">Phone</f:facet>
+		 #{s.phone} </h:column>
+		  <h:column> 
+		 <f:facet name="header">Fax</f:facet>
+		 #{s.fax} </h:column>
+		 
+		 
+		 
+		 <h:column>
+		 <f:facet name="header">Actions</f:facet>
+		 <h:commandButton action="#{storeController.delete(s)}" value="Delete" 
+		 onClick="return window.confirm ('Are you sure?')">
+		 <f:ajax render="frmStore:dtStore"/></h:commandButton>
+		 <h:commandButton action="#{storeController.update(s)}" value="Update" >
+		 <f:ajax render="frmStore"/> </h:commandButton>
+		 </h:column>
+		 </h:dataTable>
+		</h:form>
+	
+	</body>
+	
+	
+</html>

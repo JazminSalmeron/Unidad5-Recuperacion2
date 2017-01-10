@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:head>
+</h:head>
+<body>
+	<h1>Dorama</h1>
+	<h:form id="frmDorama">
+	Name:<h:inputText value="#{doramaController.dorama.name}" />
+	
+	Category:<h:inputText value="#{doramaController.dorama.category}" />
+	Director:<h:inputText value="#{doramaController.dorama.director}" />
+	
+	
+	
+	
+		 <h:commandButton action="#{doramaController.save}" value="Save">
+		 <f:ajax execute="frmDorama" render="frmDorama" /> 
+		 </h:commandButton>
+		 <h:commandButton rendered="#{doramaController.editMode}"
+		  action="#{doramaController.save}" value="Cancel" >
+		  <f:ajax render="frmDorama"></f:ajax>
+		  </h:commandButton>
+		 <h:dataTable value="#{doramaController.doramas}" var="d" id="dtDorama">
+		 <h:column> 
+		 <f:facet name="header">ID</f:facet>
+		 #{d.id} </h:column>
+		 <h:column> 
+		 <f:facet name="header">Name</f:facet>
+		 #{d.name} </h:column>
+		 <h:column> 
+		 <f:facet name="header">Category</f:facet>
+		 #{d.category} </h:column>
+		 <h:column> 
+		 <f:facet name="header">Director</f:facet>
+		 #{d.director} </h:column>
+		 <h:column>
+		 <f:facet name="header">Actions</f:facet>
+		 <h:commandButton action="#{doramaController.delete(d)}" value="Delete" 
+		 onClick="return window.confirm ('Are you sure?')">
+		 <f:ajax render="frmDorama:dtDorama"/></h:commandButton>
+		 <h:commandButton action="#{doramaController.update(d)}" value="Update" >
+		 <f:ajax render="frmDorama"/> </h:commandButton>
+		 </h:column>
+		 </h:dataTable>
+		</h:form>
+	
+	</body>
+	
+	
+</html>
